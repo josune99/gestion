@@ -5,13 +5,15 @@ import random
 import sys
 
 class Jugador:
-    def __init__(self,name):
+    def __init__(self,name,tipo):
         self.name=name
+        self.tipo=tipo
     
 if __name__ =="__main__":
     s="s"
     nombre=input("Hola! Cómo te llamas? ")
-    player=Jugador(nombre)
+    player=Jugador(nombre,'humano')
+    maquina=Jugador('Robot','maquina')
     while s=="s":
         player.intentos=0
         num=random.randrange(0,10)
@@ -29,7 +31,7 @@ if __name__ =="__main__":
         respuesta='falso'
         menor=0
         mayor=10
-        intentos2=0
+        maquina.intentos=0
         while 'correcto'!=respuesta:
             if(menor!=mayor):
                 num=random.randrange(menor,mayor)
@@ -41,12 +43,12 @@ if __name__ =="__main__":
                 menor=num+1
             elif respuesta=='menor':
                 mayor=num-1
-            intentos2+=1
-        if(intentos2<player.intentos):
-            print("Yo gano. He acertado en {} intentos".format(intentos2))
-        elif(player.intentos<intentos2):
-            print("Tú ganas. He acertado en {} intentos".format(intentos2))
+            maquina.intentos+=1
+        if(maquina.intentos<player.intentos):
+            print("Yo gano. He acertado en {} intentos".format(maquina.intentos))
+        elif(player.intentos<maquina.intentos):
+            print("Tú ganas. He acertado en {} intentos".format(maquina.intentos))
         else:
-            print("Hemos empatado. He acertado en {} intentos".format(intentos2))
+            print("Hemos empatado. He acertado en {} intentos".format(maquina.intentos))
         s=input("Quieres volver a jugar s/n ")
     sys.exit()
